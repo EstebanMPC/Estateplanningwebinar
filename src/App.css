@@ -1,38 +1,717 @@
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #333;
+}
+
 .App {
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header Styles */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(46, 46, 46, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+  padding: 1rem 0;
+}
+
+.law-firm-name {
   text-align: center;
+  color: #FFD700;
+  font-size: 1.5rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+/* Hero Section */
+.hero-section {
+  position: relative;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  background: linear-gradient(135deg, #2E2E2E 0%, #1a1a1a 100%);
+  overflow: hidden;
+  padding-top: 80px;
+}
+
+.video-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.background-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: 1;
+  opacity: 0.8;
+}
+
+.background-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: 1;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+/* Loading state for lazy loading */
+.video-background.loading {
+  background: linear-gradient(135deg, #2E2E2E 0%, #1a1a1a 100%);
+}
+
+.video-background.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  border: 3px solid rgba(255, 215, 0, 0.3);
+  border-top: 3px solid #FFD700;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  z-index: 2;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Fallback background for when video doesn't load */
+.video-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #2E2E2E 0%, #1a1a1a 100%);
+  z-index: 0;
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(46, 46, 46, 0.7);
+  z-index: 2;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
   color: white;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-.App-link {
-  color: #61dafb;
+.headline {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-@keyframes App-logo-spin {
+.subheadline {
+  font-size: 1.4rem;
+  margin-bottom: 3rem;
+  opacity: 0.9;
+  font-weight: 300;
+}
+
+.highlight-date {
+  color: #FFD700;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: #FFD700;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Countdown Timer */
+.countdown-timer {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.timer-item {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1.5rem 1rem;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  min-width: 100px;
+}
+
+.timer-number {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #FFD700;
+  line-height: 1;
+}
+
+.timer-label {
+  display: block;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 0.5rem;
+  opacity: 0.8;
+}
+
+/* CTA Button */
+.cta-button {
+  background: #FFD700;
+  color: #2E2E2E;
+  border: none;
+  padding: 18px 40px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+  margin-bottom: 2rem;
+  min-height: 60px;
+  min-width: 250px;
+}
+
+.cta-button:hover {
+  background: #ffed4e;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px rgba(255, 215, 0, 0.4);
+}
+
+.cta-button:active {
+  transform: translateY(0);
+}
+
+/* Trust Indicators */
+.trust-indicators {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+/* Speaker Section */
+.speaker-section {
+  padding: 80px 0;
+  background: white;
+}
+
+.speaker-section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: #2E2E2E;
+  font-weight: 700;
+}
+
+.speaker-card {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  max-width: 900px;
+  margin: 0 auto;
+  background: #f8f9fa;
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e9ecef;
+}
+
+.speaker-image {
+  flex-shrink: 0;
+}
+
+.speaker-photo {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #FFD700;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.speaker-info {
+  flex: 1;
+}
+
+.speaker-name {
+  font-size: 2rem;
+  color: #2E2E2E;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+.speaker-bio {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #666;
+  margin: 0;
+}
+
+/* Benefits Section */
+.benefits-section {
+  padding: 80px 0;
+  background: #f8f9fa;
+}
+
+.benefits-section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: #2E2E2E;
+  font-weight: 700;
+}
+
+.benefits-list {
+  list-style: none;
+  padding: 0;
+  margin: 3rem 0;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.benefit-item {
+  background: white;
+  padding: 1.5rem 2rem 1.5rem 3rem;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  border-left: 4px solid #FFD700;
+  position: relative;
+}
+
+.benefit-item:hover {
+  transform: translateX(5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  border-left-color: #ffed4e;
+}
+
+.benefit-item::before {
+  content: '✓';
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #FFD700;
+  color: #2E2E2E;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.benefit-item strong {
+  color: #2E2E2E;
+  font-weight: 700;
+  font-size: 1.1rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.benefit-item {
+  color: #666;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal-content {
+  background: white;
+  padding: 3rem;
+  border-radius: 20px;
+  max-width: 500px;
+  width: 100%;
+  position: relative;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+  animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
+    transform: translateY(-50px);
   }
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #666;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.3s ease;
+}
+
+.modal-close:hover {
+  background: #f0f0f0;
+}
+
+.modal-content h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #2E2E2E;
+  text-align: center;
+  font-weight: 700;
+}
+
+.modal-content p {
+  text-align: center;
+  color: #666;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+/* Form Styles */
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #2E2E2E;
+  font-size: 1rem;
+}
+
+.form-group input {
+  padding: 15px;
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background: #f8f9fa;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #FFD700;
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+  background: white;
+}
+
+.submit-button {
+  background: #FFD700;
+  color: #2E2E2E;
+  border: none;
+  padding: 18px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 1rem;
+}
+
+.submit-button:hover {
+  background: #ffed4e;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .headline {
+    font-size: 2.5rem;
+  }
+  
+  .subheadline {
+    font-size: 1.2rem;
+  }
+  
+  .highlight-date {
+    font-size: 1.2rem;
+  }
+  
+  .countdown-timer {
+    gap: 1rem;
+  }
+  
+  .timer-item {
+    padding: 1rem 0.5rem;
+    min-width: 80px;
+  }
+  
+  .timer-number {
+    font-size: 2rem;
+  }
+  
+  .cta-button {
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    min-width: 200px;
+  }
+  
+  .speaker-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+    padding: 2rem;
+  }
+  
+  .speaker-photo {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .speaker-name {
+    font-size: 1.8rem;
+  }
+  
+  .speaker-bio {
+    font-size: 1rem;
+  }
+  
+  .benefits-list {
+    margin: 2rem 0;
+  }
+  
+  .benefit-item {
+    padding: 1.2rem 1.5rem 1.2rem 2.5rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  .benefit-item strong {
+    font-size: 1rem;
+  }
+  
+  .modal-content {
+    padding: 2rem;
+    margin: 10px;
+  }
+  
+  .modal-content h2 {
+    font-size: 1.8rem;
+  }
+  
+  /* Mobile optimizations for both video and image */
+  .background-video,
+  .background-image {
+    opacity: 0.6;
+  }
+  
+  .video-overlay {
+    background: rgba(46, 46, 46, 0.8);
+  }
+  
+  /* Ensure image loads quickly on mobile */
+  .background-image {
+    opacity: 0.7;
+  }
+  
+  /* Mobile header adjustments */
+  .header {
+    padding: 0.8rem 0;
+  }
+  
+  .law-firm-name {
+    font-size: 1.3rem;
+  }
+  
+  .hero-section {
+    padding-top: 70px;
+  }
+}
+
+@media (max-width: 480px) {
+  .headline {
+    font-size: 2rem;
+  }
+  
+  .subheadline {
+    font-size: 1rem;
+  }
+  
+  .highlight-date {
+    font-size: 1rem;
+  }
+  
+  .countdown-timer {
+    gap: 0.5rem;
+  }
+  
+  .timer-item {
+    padding: 0.8rem 0.3rem;
+    min-width: 70px;
+  }
+  
+  .timer-number {
+    font-size: 1.8rem;
+  }
+  
+  .timer-label {
+    font-size: 0.8rem;
+  }
+  
+  .cta-button {
+    padding: 12px 25px;
+    font-size: 1rem;
+    min-width: 180px;
+  }
+  
+  .benefits-section {
+    padding: 60px 0;
+  }
+  
+  .benefits-section h2 {
+    font-size: 2rem;
+  }
+  
+  .speaker-card {
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+  
+  .speaker-photo {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .speaker-name {
+    font-size: 1.5rem;
+  }
+  
+  .speaker-bio {
+    font-size: 0.95rem;
+  }
+  
+  .benefits-list {
+    margin: 1.5rem 0;
+  }
+  
+  .benefit-item {
+    padding: 1rem 1.2rem 1rem 2rem;
+    margin-bottom: 0.6rem;
+  }
+  
+  .benefit-item strong {
+    font-size: 0.95rem;
+  }
+  
+  .benefit-item::before {
+    width: 20px;
+    height: 20px;
+    font-size: 0.8rem;
+    left: 6px;
+  }
+  
+  /* Extra small mobile optimizations */
+  .background-image {
+    opacity: 0.6;
+  }
+  
+  .video-overlay {
+    background: rgba(46, 46, 46, 0.85);
+  }
+  
+  /* Extra small mobile header */
+  .header {
+    padding: 0.6rem 0;
+  }
+  
+  .law-firm-name {
+    font-size: 1.1rem;
+  }
+  
+  .hero-section {
+    padding-top: 60px;
   }
 }
