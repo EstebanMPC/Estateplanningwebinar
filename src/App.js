@@ -14,7 +14,6 @@ function App() {
     phone: ''
   });
 
-  // Mobile detection
   useEffect(() => {
     const checkMobile = () => {
       const isMobileDevice = window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -27,7 +26,6 @@ function App() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Lazy load video for desktop only
   useEffect(() => {
     if (!isMobile && videoRef.current) {
       const observer = new IntersectionObserver(
@@ -46,7 +44,6 @@ function App() {
     }
   }, [isMobile]);
 
-  // Countdown timer calculation
   useEffect(() => {
     const targetDate = new Date('2025-10-01T19:00:00-05:00').getTime();
     
@@ -82,7 +79,6 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you would typically send the data to your backend
     console.log('Form submitted:', formData);
     alert('Thank you for registering! You will receive a confirmation email shortly.');
     setShowModal(false);
@@ -136,7 +132,8 @@ function App() {
         <div className="hero-content">
           <div className="container">
             <h1 className="headline">
-              Secure Your Legacy: Join Our Free Estate Planning Webinar
+              <div className="headline-main">Secure Your Legacy</div>
+              <div className="headline-sub">Join Our <span className="underline-free">Free</span> Estate Planning Webinar</div>
             </h1>
             
             <p className="subheadline">
@@ -176,7 +173,6 @@ function App() {
         </div>
       </section>
 
-      {/* Speaker Section */}
       <section className="speaker-section">
         <div className="container">
           <h2>Meet Your Expert Speaker</h2>
@@ -221,6 +217,76 @@ function App() {
               <strong>Business Succession</strong> - Plan for the future of your business and ensure smooth transitions
             </li>
           </ul>
+        </div>
+      </section>
+
+      <section className="reviews-section">
+        <div className="container">
+          <h2>What Our Clients Say</h2>
+          <div className="reviews-grid">
+            <div className="review-card">
+              <div className="review-content">
+                <p className="review-text">
+                  "At my age, I wanted peace of mind knowing my assets would be handled exactly as I wished, and Elizabeth Harper at PrimeTrust Legal made that happen. Her clear explanations and warm approach during the estate planning workshop helped me set up a trust without any stress, ensuring my grandchildren are taken care of."
+                </p>
+              </div>
+              <div className="review-author">
+                <img 
+                  src="/files/grandmother.jpg" 
+                  alt="Margaret Thompson" 
+                  className="review-photo"
+                />
+                <div className="author-info">
+                  <h4 className="author-name">Margaret Thompson, 78</h4>
+                </div>
+              </div>
+            </div>
+
+            <div className="review-card">
+              <div className="review-content">
+                <p className="review-text">
+                  "As a new dad to my 5-year-old son, I hadn't thought much about estate planning until I attended Elizabeth Harper's webinar at PrimeTrust Legal. She broke down the importance of a will and guardianship in a way that was easy to understand, and now I feel confident my son's future is secure if anything happens to me."
+                </p>
+              </div>
+              <div className="review-author">
+                <img 
+                  src="/files/dadkidson.jpg" 
+                  alt="Ryan Carter" 
+                  className="review-photo"
+                />
+                <div className="author-info">
+                  <h4 className="author-name">Ryan Carter, 34</h4>
+                </div>
+              </div>
+            </div>
+
+            <div className="review-card">
+              <div className="review-content">
+                <p className="review-text">
+                  "With my son heading to college soon, I needed to get my estate plan in order, and Elizabeth Harper's workshop at PrimeTrust Legal was a game-changer. Her practical advice and personalized approach gave me the tools to protect my son's future and my assets, all while making a complex topic feel manageable."
+                </p>
+              </div>
+              <div className="review-author">
+                <img 
+                  src="/files/motherson.jpg" 
+                  alt="Laura Bennett" 
+                  className="review-photo"
+                />
+                <div className="author-info">
+                  <h4 className="author-name">Laura Bennett, 46</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="reviews-cta">
+            <button 
+              className="cta-button"
+              onClick={() => setShowModal(true)}
+            >
+              Reserve Your Spot Now
+            </button>
+          </div>
         </div>
       </section>
 
@@ -279,6 +345,12 @@ function App() {
           </div>
         </div>
       )}
+
+      <footer className="footer">
+        <div className="container">
+          <div className="footer-content">PrimeTrust Legal</div>
+        </div>
+      </footer>
     </div>
   );
 }
